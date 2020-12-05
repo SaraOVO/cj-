@@ -22,12 +22,12 @@ void input(int a[][4] ,int m,int n)
     int  i, j;
     fstream  infile;
     infile.open("cj1.txt"); 
-    for(i=0; i<m-1; i++)      // i 控制行数 
-    {    
+    for(i=0;i<m-1; i++)      // i 控制行数 
+    {   
 	    for(j=0; j<n-1; j++) // j 控制列数 
-        infile>>a[i][j];   //  文件数据读入到内存a[i][j] 
-    }  
-    infile.close();
+        infile>>a[i][j];   //  文件数据读入到内存a[i][j]   
+    }
+	infile.close();
 }
 void output(int a[][4] ,int m,int n)
 {
@@ -37,10 +37,11 @@ void output(int a[][4] ,int m,int n)
 	    cout<<endl;   
     }
 }
-void fun2(int a[][4],int i,int j )
+void fun2(int a[][4],int m,int n )
 {
+	int i,j;
     cout<<"功能2：求每人的平均分\n";
-    for(i=0; i<4; i++)      /*  i 控制行数 */
+    for(i=0; i<m-1; i++)      /*  i 控制行数 */
     {   
 	    for(j=0; j<3; j++) /* j 控制列数 */
         {
@@ -50,23 +51,25 @@ void fun2(int a[][4],int i,int j )
 		cout<<a[i][3]<<endl;   
     }
 }
-void fun3(int a[][4],int i,int j)
+void fun3(int a[][4],int m,int n)
 {
+	int i,j;
     cout<<"功能3：求每门课的平均分\n";
     for(j=0;j<3;j++)
 	{
-		for(i=0;i<3;i++)
+		for(i=0;i<m-2;i++)
 		    a[4][j]+=a[i][j];
 		a[4][j]/=4;
 		cout<<a[4][j]<<'\t';
 	}
 }
-void fun7(int a[][4],int i,int j)
+void fun7(int a[][4],int m,int n)
 {
+	int i,j;
     cout<<"功能7: 导出到文件\n";
     fstream outfile;
     outfile.open("cj2.txt");
-    for(i=0; i<5; i++)      
+    for(i=0; i<m; i++)      
     {   
 	    for(j=0; j<4; j++) 
             outfile << a[i][j]<<" ";  
@@ -78,10 +81,12 @@ int main()
 {
 //int cj[5][4] ={ {89, 78, 56},{88,99,100},{72,80,61}, {60,70,75}}; 
 
-    int cj[5][4]={0};    
-    int  i, j;
-    int choose; 
-    input(cj,5,4);
+    int cj[][4]={0};    
+    int  a;
+    int choose;
+	cout<<"请输入学生人数:"<<endl;
+    cin>>a;
+    input(cj,a+1,4);
     menu();//choose = -1;
     cin>>choose;
     while (choose!=0) 
@@ -90,10 +95,10 @@ int main()
         // if(choose==0) break;
         switch (choose) 
         {
-	    case 1:output(cj,5,4);break;
-        case 2:fun2(cj,5,4);break;
-        case 3:fun3(cj,5,4);break;
-        case 7:fun7(cj,5,4);break;
+	    case 1:output(cj,a+1,4);break;
+        case 2:fun2(cj,a+1,4);break;
+        case 3:fun3(cj,a+1,4);break;
+        case 7:fun7(cj,a+1,4);break;
         }
         system("pause");
         //getchar();
